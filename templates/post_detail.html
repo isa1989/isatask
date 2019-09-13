@@ -1,0 +1,91 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <link rel="stylesheet" href="{% static 'css/todo.css' %}" type="text/css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12">
+       <div style="margin:0 auto;width:800px">
+                    <h2>Tapşırığın adı:    {{ form.name }}<hr>
+                    <small>Bitmə tarixi:    {{ form.end_time }}</small></h2><hr>
+                     <p>Açıqlaması:    {{ form.description }}</p><hr>
+               <div>
+                   {% if request.user == form.user %}
+                   <a href="{% url 'app:update' form.id %}">Tapşırığı redaktə et</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                   <a href="{% url 'app:delete' form.id %}">Tapşırığı sil</a><hr>
+                   {% endif %}
+               </div>
+
+            <div> {% if request.user == form.user  %}
+
+                  <h3>
+                     Şərhlər: {{ form.comment.all|length }}<hr>
+                     {% for comment in form.comment.all %}
+                     <h2>{{ comment.user.get_full_name }},
+                     <small>{{comment.date|timesince}}</small><br></h2>
+                     <small>{{ comment.description }}</small><hr>
+                     {% if request.user == comment.user %}
+                     <a href="{% url 'app:comment_delete' comment.id %}">şərhi sil</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                     <a href="{% url 'app:comment_update' comment.id %}">şərhi redaktə et</a><hr>
+                     {% endif %}
+                     {% endfor %}
+                  </h3>
+
+                  <div>
+                      <form method="post" action="">
+                      {% csrf_token %}
+                      {% for field in comment_form %}
+                      {{field.label_tag}}
+                      {{field}}
+                      {% endfor %}
+                      <input type="submit" value="serh yaz"><br>
+                      </form>
+                   </div>
+                    {% endif %}
+
+                 {% for listt in listt %}
+                    {% if request.user in listt.comment_user.all %}
+                   <h3>
+                     Şərhlər: {{ form.comment.all|length }}<hr>
+                     {% for comment in form.comment.all %}
+                     <h2>{{ comment.user.get_full_name }},
+                     <small>{{comment.date|timesince}}</small><br></h2>
+                     <small>{{ comment.description }}</small><hr>
+                     {% if request.user == comment.user %}
+                     <a href="{% url 'app:comment_delete' comment.id %}">şərhi sil</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                     <a href="{% url 'app:comment_update' comment.id %}">şərhi redaktə et</a><hr>
+                     {% endif %}
+                     {% endfor %}
+                  </h3>
+
+                  <div>
+                      <form method="post" action="">
+                      {% csrf_token %}
+                      {% for field in comment_form %}
+                      {{field.label_tag}}
+                      {{field}}
+                      {% endfor %}
+                      <input type="submit" value="serh yaz"><br>
+                      </form>
+                   </div>
+                    {% endif %}
+                 {% endfor %}
+
+
+
+            </div>
+       </div>
+   </div>
+</div>
+{% for listt in listt  %}
+{{listt.comment_user.all }}@
+{% endfor %}
+</body>
+</html>
+{% endblock content %}
