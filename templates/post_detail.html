@@ -30,10 +30,16 @@
                      <h2>{{ comment.user.get_full_name }},
                      <small>{{comment.date|timesince}}</small><br></h2>
                      <small>{{ comment.description }}</small><hr>
-                     {% if request.user == comment.user %}
+
+                      {% if request.user == form.user %}
+
                      <a href="{% url 'app:comment_delete' comment.id %}">şərhi sil</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                       {% endif %}
+                      {% if request.user == comment.user %}
                      <a href="{% url 'app:comment_update' comment.id %}">şərhi redaktə et</a><hr>
-                     {% endif %}
+                        {% endif %}
+
+
                      {% endfor %}
                   </h3>
 
@@ -49,8 +55,9 @@
                    </div>
                     {% endif %}
 
-                 {% for listt in listt %}
-                    {% if request.user in listt.comment_user.all %}
+
+                    {% if request.user in form.comment_user.all %}
+                    {% if request.user != form.user %}
                    <h3>
                      Şərhlər: {{ form.comment.all|length }}<hr>
                      {% for comment in form.comment.all %}
@@ -73,9 +80,9 @@
                       {% endfor %}
                       <input type="submit" value="serh yaz"><br>
                       </form>
-                   </div>
+                   </div>{% endif %}
                     {% endif %}
-                 {% endfor %}
+
 
 
 
@@ -83,9 +90,9 @@
        </div>
    </div>
 </div>
-{% for listt in listt  %}
-{{listt.comment_user.all }}@
-{% endfor %}
+
+{{form.comment_user.all }}@
+
 </body>
 </html>
 {% endblock content %}
