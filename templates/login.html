@@ -8,16 +8,16 @@
     <title>Title</title>
 </head>
 <body>
-<form action="{% url 'users:user_login' %}" method="post">
-    {% csrf_token %}
-     {% for field in form %}
-        {{field.label_tag}}
-        {{field}}
-        <br>
+     <form action="{% url 'users:user_login' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {{field.label_tag}}
+            {{field}}
+            <br>
         {% endfor %}
-        <input type="submit" value="Log in">
+            <input type="submit" value="Log in">
 
-</form>
+     </form>
 </body>
 </html>
 {% endblock %}

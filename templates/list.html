@@ -5,15 +5,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="{% static 'css/todo.css' %}" type="text/css">
-    <meta charset="UTF-8">
-    <title></title>
+     <link rel="stylesheet" href="{% static 'css/todo.css' %}" type="text/css">
+     <meta charset="UTF-8">
+     <title></title>
   </head>
 <body>
     <div>
        {% if request.user.is_authenticated %}
            <li><a href="#">{{ request.user.get_full_name }}</a></li>
-           <li><a href="{% url 'app:create' %}">Post yarat</a></li>
+           <li><a href="{% url 'app:create' %}">Tapşırıq yarat</a></li>
 
 
 
@@ -22,7 +22,7 @@
            <a href="{% url 'users:user_login' %}">Log in</a> </li>
        {% endif %}
     </div>
-
+    <div>
        {% for list in list %}
            <h3><a href="{% url 'app:detail' list.pk %}">Tapşırığın adı:    {{ list.name }},</a>
            <small>Bitmə tarixi:    {{ list.end_time }}</small>
@@ -44,7 +44,7 @@
            {% endif %}
        {% endfor %}
 
-
+    </div>
 {% endblock %}
 
 </body>
