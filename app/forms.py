@@ -14,6 +14,15 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['other_user', 'comment_user', 'name', 'description', 'end_time']
 
+    def send_email(self):
+        # try to trick spammers by checking whether the honeypot field is
+        # filled in; not super complicated/effective but it works
+        if self.cleaned_data['honeypot']:
+            return False
+        send_feedback_email_task.delay(
+            self.cleaned_data['name'], self.cleaned_data['end_time'])
+
+
 
 class CommentForm(forms.ModelForm):
 

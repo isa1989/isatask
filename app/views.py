@@ -5,10 +5,14 @@ from .models import Task, Comment
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 import datetime
-
+from .tasks import send_feedback_email_task,sample_task
 
 
 # Create your views here.
+def asix(request, pk):
+    x = datetime.now()
+    task = Task.objects.filter(end_time=x)
+    sample_task.delay("isleyir!")
 
 def create(request):
     create_form = TaskForm()
@@ -18,9 +22,9 @@ def create(request):
             created_form = create_form.save(commit=False)
             created_form.user = request.user
             created_form.save()
+            sample_task.delay("Our printed value!")
             return HttpResponseRedirect(reverse('app:detail', kwargs={'pk':created_form.id}))
     return render(request,'post_create.html', context={'form':create_form})
-
 
 
 

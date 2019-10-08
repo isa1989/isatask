@@ -23,9 +23,6 @@ class Task(models.Model):
         return self.name
 
 
-
-
-
 class Comment(models.Model):
     comm = models.ForeignKey(Task, verbose_name='Task', related_name='comment',on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name='User', related_name='user_comments',on_delete=models.CASCADE)
