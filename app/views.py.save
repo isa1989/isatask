@@ -5,11 +5,15 @@ from .models import Task, Comment
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 import datetime
-from .tasks import *
-
+from .tasks import send_feedback_email_task,sample_task
 
 
 # Create your views here.
+def asix(request, pk):
+    x = datetime.now()
+    task = Task.objects.filter(end_time=x)
+    sample_task.delay("isleyir!")
+
 def create(request):
     create_form = TaskForm()
     if request.method == 'POST':
@@ -18,6 +22,7 @@ def create(request):
             created_form = create_form.save(commit=False)
             created_form.user = request.user
             created_form.save()
+            sample_task.delay("Our printed value!")
             return HttpResponseRedirect(reverse('app:detail', kwargs={'pk':created_form.id}))
     return render(request,'post_create.html', context={'form':create_form})
 
@@ -45,6 +50,7 @@ def detail(request, pk):
 
 
     comment_form = CommentForm(request.POST or None)
+
     if comment_form.is_valid():
         comment_form
         comment = comment_form.save(commit=False)
@@ -52,9 +58,10 @@ def detail(request, pk):
         comment.user = request.user
         comment.save()
         #comment_form = CommentForm()
+        endtime_
         return redirect('app:detail', pk)
     else:
-        return render(request, 'post_detail.html', context={'form':form,  'comment_form':comment_form})
+        return render(request, 'post_detail.html', context={'form':form,  'comment_form':comment_form,})
 
 @login_required(login_url='/users/login/')
 def update(request, pk):
