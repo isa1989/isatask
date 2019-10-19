@@ -8,19 +8,13 @@ class TaskForm(forms.ModelForm):
         super(TaskForm, self).__init__(*args,**kwargs)
         for field in self.fields:
             self.fields[field].widget.attrs={'class':'form-control'}
-            self.fields['end_time'].widget.attrs['placeholder'] =  '2019-01-01 00:00:00'
+            self.fields['end_time'].widget.attrs['placeholder'] = '2019-01-01 00:00:00'
 
     class Meta:
         model = Task
         fields = ['other_user', 'comment_user', 'name', 'description', 'end_time']
 
-    def send_email(self):
-        # try to trick spammers by checking whether the honeypot field is
-        # filled in; not super complicated/effective but it works
-        if self.cleaned_data['honeypot']:
-            return False
-        send_feedback_email_task.delay(
-            self.cleaned_data['name'], self.cleaned_data['end_time'])
+
 
 
 
