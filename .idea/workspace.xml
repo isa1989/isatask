@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f54ae2f6-bfa5-4e51-be4e-6b623ef50981" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo/.settings.py.swp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/Todo/celery.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Todo/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/tasks.py.save" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views.py.save" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/emails.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/tasks.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +35,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../tutorial" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -77,7 +72,8 @@
       <workItem from="1571258548875" duration="5281000" />
       <workItem from="1571336867103" duration="6585000" />
       <workItem from="1571428200138" duration="13200000" />
-      <workItem from="1571511362317" duration="3414000" />
+      <workItem from="1571511362317" duration="5803000" />
+      <workItem from="1571607192273" duration="108000" />
     </task>
     <servers />
   </component>

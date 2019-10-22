@@ -12,7 +12,7 @@ class Task(models.Model):
     user = models.ForeignKey(User, verbose_name='User', related_name='user',on_delete=models.CASCADE)
     other_user = models.ManyToManyField(User,related_name='other_user', verbose_name='Tapşırığı görsünlər', blank=True)
     comment_user = models.ManyToManyField(User, related_name='comment_user', verbose_name='Şərh yazsınlar', blank=True)
-    name = models.CharField(max_length = 100, verbose_name='Tapşırığın adı')
+    name = models.CharField(max_length=100, verbose_name='Tapşırığın adı')
     #slug = models.SlugField(max_length=122,unique=True, null = False, verbose_name='Slug',editable=False)
     description = models.TextField(verbose_name='Tapşırığın açıqlaması')
     end_time = models.DateTimeField(verbose_name='Tapşırığın bitmə tarixi')
