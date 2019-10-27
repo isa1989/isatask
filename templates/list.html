@@ -23,28 +23,17 @@
        {% endif %}
     </div>
     <div>
-       {% for list in list %}
-           <h3><a href="{% url 'app:detail' list.pk %}">Tapşırığın adı:    {{ list.name }},</a>
+      {% for list in list %}
+            
+            <h3><a href="{% url 'app:detail' list.pk %}">Tapşırığın adı:    {{ list.name }},</a>
            <small>Bitmə tarixi:    {{ list.end_time }}</small>
            </h3>
            <p>Açıqlama:     <br>{{ list.description }}</p>
            <hr>
-       {% endfor %}
-
-       {% for post in post  %}
-
-           {% if request.user in post.other_user.all %}
-               {% if request.user != post.user %}
-                    <h2><a href="{% url 'app:detail' post.pk %}">Tapşırığın adı:    {{ post.name }},</a>
-                    <small>Bitmə tarixi:    {{ post.end_time }}</small>
-                    </h2>
-                     <p>Açıqlama:    <br>{{ post.description}}</p>
-                    <hr>
-               {% endif %}
-           {% endif %}
-       {% endfor %}
-
+           
+      {% endfor %}
     </div>
+
 {% endblock %}
 
 </body>

@@ -6,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 import datetime
 from .tasks import *
-
+from django.db.models import Q
 
 
 # Create your views here.
+@login_required(login_url='/users/login/')
 def create(request):
     create_form = TaskForm()
     if request.method == 'POST':
@@ -25,36 +26,40 @@ def create(request):
 
 @login_required(login_url='/users/login/')
 def list(request):
-    list = Task.objects.filter(user=request.user)
-    post = Task.objects.all()
+    list = Task.objects.filter(Q(user=request.user)|Q(other_user=request.user))
 
-    return render(request, 'list.html', context={'list':list,'post':post})
+    return render(request, 'list.html', context={'list':list})
 
 
 
 @login_required(login_url='/users/login/')
 def detail(request, pk):
-    #post = get_object_or_404(Task, pk=pk)
-    #list = Task.objects.filter(user=request.user)
-    #listt = Task.objects.all()
-    try:
-        form = Task.objects.get(pk=pk)
-    except ObjectDoesNotExist:
-        return redirect('app:list')
-
-
-
-    comment_form = CommentForm(request.POST or None)
-    if comment_form.is_valid():
-        comment_form
-        comment = comment_form.save(commit=False)
-        comment.comm = form
-        comment.user = request.user
-        comment.save()
-        #comment_form = CommentForm()
-        return redirect('app:detail', pk)
+    form = get_object_or_404(Task, pk=pk)
+       
+    if request.user == form.user or request.user in form.other_user.all():
+        print('icazə verilən istifadəçilər taskı görür')
     else:
-        return render(request, 'post_detail.html', context={'form':form,  'comment_form':comment_form})
+        return HttpResponse('Belə səhifə tapılmadı')
+ 
+    
+    if request.user == form.user or request.user in form.comment_user.all():
+        print('icazə verilən istifadəçilər şərhləri görür')
+        
+        comment_form = CommentForm(request.POST or None)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.comm = form
+            comment.user = request.user
+            comment.save()
+            #comment_form = CommentForm()
+    
+            return redirect('app:detail', pk)
+
+        else:
+            return render(request, 'post_detail.html', context={'form':form,  'comment_form':comment_form})
+    else:
+        return render(request, 'post_detail.html', context={'form':form})
+
 
 @login_required(login_url='/users/login/')
 def update(request, pk):

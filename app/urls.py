@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('list/', view = list, name='list'),
     path('create/', view=create, name='create'),
-    re_path('^detail/(?P<pk>[0-9]+)$', view=detail, name='detail'),
+    url('^detail/(?P<pk>[0-9]+)$', view=detail, name='detail'),
     re_path('^update/(?P<pk>[0-9]+)$', view=update, name='update'),
     re_path('^delete/(?P<pk>[0-9]+)$', view=delete, name='delete'),
     re_path('^comment_delete/(?P<pk>[0-9]+)$', view=comment_delete, name='comment_delete'),

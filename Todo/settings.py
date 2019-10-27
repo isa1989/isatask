@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'app',
     'users',
     'django_celery_beat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +71,26 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Todo.wsgi.application'
+#WSGI_APPLICATION = 'Todo.wsgi.application'
+
+ASGI_APPLICATION = 'Todo.routing.application'
+
+
+CHANNEL_LAYERS = {
+
+    'default': {
+
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+
+        'CONFIG': {
+
+            "hosts": [('redis', 6379)],
+
+        },
+
+    },
+
+}
 
 
 # Database
